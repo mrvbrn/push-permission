@@ -40,6 +40,18 @@ export default function App() {
     });
   };
 
+
+useEffect(() => {
+  const subscription = Notifications.addNotificationReceivedListener(
+    (notification) => {
+      console.log(notification)
+    }
+  )
+  return  () => {
+    subscription.remove();
+  }
+},[])
+
   return (
     <View style={styles.container}>
       <Button
