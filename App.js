@@ -23,9 +23,18 @@ export default function App() {
       })
       .then((statusObj) => {
         if (statusObj.status !== 'granted') {
-          return;
+          throw new Error ('Permission not granted!');
         }
-      });
+      })
+      .then(() => {
+        return Notifications.getExpoPushTokenAsync();
+      })
+      .then((response) => {
+        const token = response.data;
+      })
+      .catch((err) => {
+        return null;
+      })
   }, []);
 
   const triggerNotificationHandler = () => {
